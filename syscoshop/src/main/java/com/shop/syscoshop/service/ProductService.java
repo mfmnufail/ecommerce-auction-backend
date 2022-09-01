@@ -4,6 +4,7 @@ import com.shop.syscoshop.entity.Product;
 import com.shop.syscoshop.payload.ProductDto;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 public interface ProductService {
@@ -12,6 +13,6 @@ public interface ProductService {
     List<Product> getAllProducts();
     ProductDto getProductById(UUID id);
     ProductDto updateProduct(ProductDto productDto);
-    ProductDto deleteProduct(UUID id);
+    void deleteProduct(UUID id);
 
 }

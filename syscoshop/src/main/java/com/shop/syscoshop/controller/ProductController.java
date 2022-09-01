@@ -8,9 +8,12 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/api/product")
+@CrossOrigin(origins = "http://localhost:3000")
 public class ProductController {
 
     ProductService productService;
@@ -27,5 +30,16 @@ public class ProductController {
     @GetMapping
     public ResponseEntity<List<Product>> getAllProducts(){
         return new ResponseEntity<>(productService.getAllProducts(), HttpStatus.OK);
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<ProductDto> getProductId(@PathVariable(name = "id") UUID id){
+        return new ResponseEntity<>(productService.getProductById(id),HttpStatus.OK);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<String> deleteProduct(@PathVariable(name = "id") UUID id){
+        productService.deleteProduct(id);
+        return new ResponseEntity<>("Proudct deleted",HttpStatus.OK);
     }
 }
