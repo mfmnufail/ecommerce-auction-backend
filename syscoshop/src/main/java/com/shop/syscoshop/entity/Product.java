@@ -16,21 +16,25 @@ import java.util.UUID;
 @Entity
 public class Product {
     @Id
-    @Column(name = "id", nullable = false, unique = true)
-    @GeneratedValue()
-    private UUID id;
+    @Column(name = "id",
+            nullable = false,
+            unique = true)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long id;
 
-    @Column(nullable = false)
+    @Column(nullable = false,
+            unique = true,
+            name = "product_name")
     private String productName;
     @Column(nullable = false)
     private String description;
     @Column(nullable = false)
     private float price;
-    @Column(nullable = false)
-    private String category;
 
 
-
+    @ManyToOne
+    @JoinColumn(name = "category_id")
+    private Category category;
 
 
 }

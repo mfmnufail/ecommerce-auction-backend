@@ -9,9 +9,9 @@ import java.util.UUID;
 public class ResourceNotFoundException extends RuntimeException{
     private final String resourceName;
     private final String fieldName;
-    private final UUID fieldValue;
+    private final long fieldValue;
 
-    public ResourceNotFoundException(String resourceName, String fieldName, UUID fieldValue){
+    public ResourceNotFoundException(String resourceName, String fieldName, long fieldValue){
         super(String.format("%s not found with %s: %s", resourceName, fieldName, fieldValue));
         this.resourceName = resourceName;
         this.fieldName = fieldName;
@@ -26,7 +26,7 @@ public class ResourceNotFoundException extends RuntimeException{
         return fieldName;
     }
 
-    public UUID getFieldValue() {
+    public long getFieldValue() {
         return fieldValue;
     }
 }

@@ -5,41 +5,27 @@ import com.shop.syscoshop.exception.ResourceNotFoundException;
 import com.shop.syscoshop.payload.ProductDto;
 import com.shop.syscoshop.repository.ProductRepository;
 import com.shop.syscoshop.service.ProductService;
+import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
-import javax.transaction.Transactional;
-import java.util.Collections;
 import java.util.List;
-import java.util.Optional;
-import java.util.UUID;
 
 @Service
 public class ProductServiceImpl implements ProductService {
 
     ProductRepository productRepository;
+    ModelMapper modelMapper;
 
-    public ProductServiceImpl(ProductRepository productRepository) {
+    public ProductServiceImpl(ProductRepository productRepository, ModelMapper modelMapper) {
         this.productRepository = productRepository;
+        this.modelMapper = modelMapper;
     }
 
     @Override
     public ProductDto createProduct(ProductDto productDto) {
-        Product product = new Product();
-        product.setProductName(productDto.getProductName());
-        product.setDescription(productDto.getDescription());
-        product.setPrice(productDto.getPrice());
-        product.setCategory(productDto.getCategory());
-
+        Product product = mapToEntity(productDto);
         Product newProduct = productRepository.save(product);
-
-        ProductDto responseProduct = new ProductDto();
-        responseProduct.setId(newProduct.getId());
-        responseProduct.setProductName(newProduct.getProductName());
-        responseProduct.setPrice(newProduct.getPrice());
-        responseProduct.setDescription(newProduct.getDescription());
-        responseProduct.setCategory(newProduct.getCategory());
-
-        return responseProduct;
+        return mapToDto(newProduct);
     }
 
     @Override
@@ -48,38 +34,38 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public ProductDto getProductById(UUID id) {
-//        Product product =  productRepository.findById(id).orElseThrow(()->new ResourceNotFoundException("Product","id",id));
-//        ProductDto responseProduct = new ProductDto();
-//        responseProduct.setId(product.getId());
-//        responseProduct.setProductName(product.getProductName());
-//        responseProduct.setPrice(product.getPrice());
-//        responseProduct.setDescription(product.getDescription());
-//        responseProduct.setCategory(product.getCategory());
-
+    public ProductDto getProductById(long id) {
         List<Product> products = productRepository.findAll();
-        Product product =  products.stream().filter(e-> e.getId().equals(id)).findFirst().orElseThrow(()->new ResourceNotFoundException("Product","id",id));
-        ProductDto responseProduct = new ProductDto();
-        responseProduct.setId(product.getId());
-        responseProduct.setProductName(product.getProductName());
-        responseProduct.setPrice(product.getPrice());
-        responseProduct.setDescription(product.getDescription());
-        responseProduct.setCategory(product.getCategory());
-
-        return responseProduct;
+        Product product = products.stream().filter(e -> e.getId() == id).findFirst().orElseThrow(
+                () -> new ResourceNotFoundException("Product", "id", id));
+        return mapToDto(product);
     }
 
     @Override
-    public ProductDto updateProduct(ProductDto productDto) {
-        return null;
+    public ProductDto updateProduct(ProductDto productDto, long id) {
+        Product product =
+                productRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Product", "id", id));
+        product.setProductName(productDto.getProductName());
+        product.setPrice(productDto.getPrice());
+        product.setDescription(productDto.getDescription());
+        product.setCategory(productDto.getCategory());
+        productRepository.save(product);
+        return mapToDto(product);
     }
 
     @Override
-    public void deleteProduct(UUID id) {
-        List<Product> products = productRepository.findAll();
-        Product product =  products.stream().filter(e-> e.getId().equals(id)).findFirst().orElseThrow(()->new ResourceNotFoundException("Product","id",id));
-//         Product product = productRepository.findById(id).orElseThrow(()->new ResourceNotFoundException("Product","id",id));
-         productRepository.delete(product);
+    public void deleteProduct(long id) {
+        Product product =
+                productRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Product", "id", id));
+        productRepository.delete(product);
+    }
 
+
+    private Product mapToEntity(ProductDto productDto) {
+        return modelMapper.map(productDto, Product.class);
+    }
+
+    private ProductDto mapToDto(Product product) {
+        return modelMapper.map(product, ProductDto.class);
     }
 }
