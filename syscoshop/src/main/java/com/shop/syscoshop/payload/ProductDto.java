@@ -1,16 +1,17 @@
 package com.shop.syscoshop.payload;
 
+import com.sun.istack.NotNull;
 import lombok.Data;
-import org.hibernate.annotations.Type;
-
-import java.util.UUID;
 
 @Data
 public class ProductDto {
-    private UUID id;
+    private long id;
+    @NotNull
     private String productName;
     private String description;
+    @NotNull
     private float price;
+    @NotNull
     private String category;
 
 }
