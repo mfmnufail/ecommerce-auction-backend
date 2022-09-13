@@ -13,6 +13,7 @@ import javax.persistence.*;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@Table(name = "categories")
 public class Category {
     @Id
     @Column(name = "category_id",

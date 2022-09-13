@@ -3,6 +3,7 @@ package com.shop.syscoshop.controller;
 import com.shop.syscoshop.entity.Product;
 import com.shop.syscoshop.payload.ProductDto;
 import com.shop.syscoshop.service.ProductService;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -11,6 +12,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/product")
+//@CrossOrigin(origins = "*", allowedHeaders = "*")
 public class ProductController {
 
     ProductService productService;

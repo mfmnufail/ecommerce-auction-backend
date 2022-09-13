@@ -2,10 +2,13 @@ package com.shop.syscoshop.payload;
 
 
 import com.sun.istack.NotNull;
-import lombok.Data;
+import lombok.*;
 
 
-@Data
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
 public class CategoryDto {
 
     private long categoryId;
