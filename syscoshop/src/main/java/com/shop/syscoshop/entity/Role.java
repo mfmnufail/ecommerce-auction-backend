@@ -1,9 +1,6 @@
 package com.shop.syscoshop.entity;
 
 
-
-
-import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -16,18 +13,12 @@ import javax.persistence.*;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-
-public class Category {
+public class Role {
 
     @Id
-    @Column(name = "category_id",
-            nullable = false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long categoryId;
+    private long id;
 
-    @Column(name = "category_name",
-            unique = true,
-            nullable = false)
-    private String categoryName;
-
+    @Column(nullable = false)
+    private String roleName;
 }

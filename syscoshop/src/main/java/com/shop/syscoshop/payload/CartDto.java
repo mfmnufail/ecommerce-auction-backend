@@ -1,18 +1,16 @@
 package com.shop.syscoshop.payload;
 
 
-import com.sun.istack.NotNull;
 import lombok.*;
 
+import javax.validation.constraints.NotNull;
 
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class CategoryDto {
+public class CartDto {
 
-    private long categoryId;
     @NotNull
-    private String categoryName;
-
+    private String cartName;
 }

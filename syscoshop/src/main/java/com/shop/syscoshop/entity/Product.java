@@ -16,11 +16,11 @@ import java.util.UUID;
 @Entity
 public class Product {
     @Id
-    @Column(name = "id",
+    @Column(name = "product_id",
             nullable = false,
             unique = true)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private long productId;
 
     @Column(nullable = false,
             unique = true,
@@ -30,11 +30,17 @@ public class Product {
     private String description;
     @Column(nullable = false)
     private float price;
+//
+//    @Column(nullable = false)
+//    private String category;
+
+
 
 
     @ManyToOne
     @JoinColumn(name = "category_id")
     private Category category;
+
 
 
 }
