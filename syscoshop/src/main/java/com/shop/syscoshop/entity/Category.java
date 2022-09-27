@@ -1,6 +1,9 @@
 package com.shop.syscoshop.entity;
 
 
+
+
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -13,8 +16,11 @@ import javax.persistence.*;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+
 @Table(name = "categories")
+
 public class Category {
+
     @Id
     @Column(name = "category_id",
             nullable = false)
