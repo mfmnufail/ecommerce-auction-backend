@@ -17,6 +17,8 @@ import javax.persistence.*;
 @AllArgsConstructor
 @NoArgsConstructor
 
+@Table(name = "categories")
+
 public class Category {
 
     @Id
