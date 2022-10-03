@@ -33,6 +33,8 @@ public class Product {
     private String description;
     @Column(nullable = false)
     private float price;
+<<<<<<< HEAD
+=======
 //
 //    @Column(nullable = false)
 //    private String category;
@@ -41,6 +43,7 @@ public class Product {
 
     @Column(nullable = false)
     private String category;
+>>>>>>> ebb323266e5618e68bcbf4bb25f4663f262488d7
 
 //    @ManyToOne
 //    @JoinColumn(name = "category_id")

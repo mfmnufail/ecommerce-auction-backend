@@ -15,6 +15,8 @@ public class ProductDto {
     @NotNull
     private float price;
     @NotNull
-    private String category;
+    private Long categoryId;
+    @NotNull
+    private Long cartId;
 
 }
