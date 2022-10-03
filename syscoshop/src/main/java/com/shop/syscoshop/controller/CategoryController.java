@@ -1,7 +1,5 @@
 package com.shop.syscoshop.controller;
 
-
-import com.shop.syscoshop.entity.Category;
 import com.shop.syscoshop.payload.CategoryDto;
 import com.shop.syscoshop.service.CategoryService;
 import org.springframework.http.HttpStatus;
@@ -13,7 +11,8 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/category")
-@CrossOrigin(origins = "*",allowedHeaders = "*")
+
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 public class CategoryController {
 
     CategoryService categoryService;

@@ -15,6 +15,9 @@ import java.util.UUID;
 @Table(name = "products")
 @Entity
 public class Product {
+
+
+
     @Id
     @Column(name = "product_id",
             nullable = false,
@@ -30,10 +33,21 @@ public class Product {
     private String description;
     @Column(nullable = false)
     private float price;
+<<<<<<< HEAD
+=======
+//
+//    @Column(nullable = false)
+//    private String category;
 
-    @ManyToOne
-    @JoinColumn(name = "category_id")
-    private Category category;
+
+
+    @Column(nullable = false)
+    private String category;
+>>>>>>> ebb323266e5618e68bcbf4bb25f4663f262488d7
+
+//    @ManyToOne
+//    @JoinColumn(name = "category_id")
+//    private Category category;
 
 
 
