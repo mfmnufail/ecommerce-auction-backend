@@ -7,37 +7,34 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
 @Entity
 @Getter
 @Setter
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
 public class Cart {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    @Column(name = "cart_id")
+    private Long cartId;
 
     @Column(nullable = false)
-    private String cartName;
+    private Float quantity;
 
     @Column(nullable = false)
-    private Date createdDate;
+    private Float price;
 
-    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<Item> items = new HashSet<>();
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    private Set<Product> items = new HashSet<>();
 
 
-    @ManyToOne
+    @OneToOne
     @JoinColumn(name="user_id")
     private User user;
-
-
-
 
 
 

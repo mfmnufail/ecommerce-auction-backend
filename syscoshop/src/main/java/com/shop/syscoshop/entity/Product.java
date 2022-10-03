@@ -30,12 +30,6 @@ public class Product {
     private String description;
     @Column(nullable = false)
     private float price;
-//
-//    @Column(nullable = false)
-//    private String category;
-
-
-
 
     @ManyToOne
     @JoinColumn(name = "category_id")

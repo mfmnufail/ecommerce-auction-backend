@@ -35,10 +35,15 @@ public class ProductController {
         return new ResponseEntity<>(productService.getProductById(id),HttpStatus.OK);
     }
 
-    @PutMapping("/{id}")
-    public ResponseEntity<ProductDto> updateProduct(@RequestBody ProductDto productDto, @PathVariable(name = "id") long id){
-        return new ResponseEntity<>(productService.updateProduct(productDto,id),HttpStatus.OK);
+    @GetMapping("/category/{id}")
+    public ResponseEntity<List<Product>> getProductCategoryId(@PathVariable(name = "id") long id){
+        return new ResponseEntity<>(productService.getProductsByCategoryId(id),HttpStatus.OK);
     }
+
+//    @PutMapping("/{id}")
+//    public ResponseEntity<ProductDto> updateProduct(@RequestBody ProductDto productDto, @PathVariable(name = "id") long id){
+//        return new ResponseEntity<>(productService.updateProduct(productDto,id),HttpStatus.OK);
+//    }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<String> deleteProduct(@PathVariable(name = "id") long id){
